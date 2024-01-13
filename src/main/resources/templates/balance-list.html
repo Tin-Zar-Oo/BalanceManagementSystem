@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/authenticated.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Incomes</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!--   search box   -->
+    <div class="card">
+        <div class="card-header" th:text="${title}">Balance</div>
+            <div class="card-body">
+                <form action="" class="row">
+                    <div class="col-auto">
+                        <input type="date" name="dateFrom" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" name="dateTo" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <input type="text" class="form-control" placeholder="Category">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Search</button>
+                        <a href="#" class="btn btn-danger">Add New</a>
+                    </div>
+                </form>
+            </div>
+     </div>
+<!--    result -->
+    <table class="table table-striped mt-4">
+        <thead>
+        <tr>
+            <td>Date</td>
+            <td>Category</td>
+            <td>Remark</td>
+            <td class="text-end">Amount</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>2010/09/01</td>
+            <td>Student Fee</td>
+            <td>Java Course</td>
+            <td class="text-end">12000</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
