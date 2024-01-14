@@ -1,10 +1,17 @@
 package com.example.balancemanagement.controller;
 
-import java.util.*;
-public class UserController {
-    public String search(String name) {
 
-        return "";
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/admin/users")
+public class UserController {
+    @GetMapping("")
+    public String search() {
+
+        return "users";
     }
 
 }

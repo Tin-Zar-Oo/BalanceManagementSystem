@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal Fragments</title>
+</head>
+<body>
+<!--change password fragment -->
+   <div id="changePassword" th:fragment="changePass" class="modal fade" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <form action="#" method="post" class="modal-content">
+               <div class="modal-header">
+               <h5>Change Password</h5>
+               </div>
+               <div class="modal-body">
+               <div class="mb-3">
+                   <label th:for="oldPass" class="mb-1">Old Password</label>
+                   <input type="password" placeholder="Enter Old Password" class="form-control" id="oldPass">
+               </div>
+                   <div class="mb-3">
+                       <label th:for="newPass" class="mb-1">New Password</label>
+                       <input type="password" placeholder="Enter New Password" class="form-control" id="newPass">
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button class="btn btn-primary">Change Password</button>
+               </div>
+           </form>
+       </div>
+   </div>
+</body>
+</html>

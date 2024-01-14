@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/authenticated.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!--    search box-->
+    <div class="card">
+        <div class="card-header">User Management</div>
+        <div class="card-body">
+            <form class="row">
+                <div class="col-3">
+                    <select class="form-select" name="status" id="status">
+                        <option value="">All User</option>
+                        <option value="Active">Active</option>
+                        <option value="Remove">Removed</option>
+                    </select>
+                </div>
+                <div class="col-auto" >
+                    <input type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="col-auto" >
+                    <input type="date" class="form-control" >
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!--    table result -->
+    <table class="table table-striped mt-4">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Sara</td>
+            <td>Active</td>
+            <td>09258181359</td>
+            <td>sara123@gmail.com</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -16,8 +16,9 @@
                 <a th:href="@{/}" class="list-group-item">Home</a>
                 <a th:href="@{/user/home/incomes}" class="list-group-item">Incomes</a>
                 <a th:href="@{/user/home/expenses}" class="list-group-item">Expenses</a>
-                <a href="#" class="list-group-item">User Management</a>
-                <a href="#" class="list-group-item">Change Password</a>
+                <a th:href="@{/admin/users}" class="list-group-item">User Management</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#changePassword"
+                   class="list-group-item">Change Password</a>
                 <a href="#" class="list-group-item">Logout</a>
             </div>
         </div>
@@ -29,6 +30,8 @@
 
     </div>
 </div>
+<div th:replace="/fragments/modals :: changePass" id="changePassContainer">
 
+</div>
 </body>
 </html>
