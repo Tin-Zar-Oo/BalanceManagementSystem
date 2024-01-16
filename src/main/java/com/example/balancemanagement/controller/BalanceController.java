@@ -4,6 +4,7 @@ package com.example.balancemanagement.controller;
 
 import com.example.balancemanagement.model.entity.Balance;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +13,17 @@ import java.time.LocalDate;
 @Controller
 @RequestMapping("user/balance")
 public class BalanceController {
-
-    public String addNew() {
-
-        return "";
+    @GetMapping("add/{type}")
+    public String addNew(@PathVariable String type, ModelMap model) {
+        model.put("title","incomes".equals(type) ? "Add New Income" : "Add New Expense");
+        model.put("type",type);
+        return "balance-edit";
     }
-     public String edit(int id) {
-
-        return "";
+    @GetMapping("edit/{id:\\d+}")
+     public String edit(@PathVariable int id,ModelMap model) {
+        model.put("title","Edit Income");
+        model.put("type","incomes");
+        return "balance-edit";
     }
     public String save(Balance balance) {
 

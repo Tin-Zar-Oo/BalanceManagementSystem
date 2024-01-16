@@ -1,6 +1,9 @@
 package com.example.balancemanagement.controller;
 
-import java.util.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
 public class SecurityController {
       public String signIn() {
 
@@ -10,8 +13,9 @@ public class SecurityController {
 
         return "";
     }
+    @GetMapping("signout")
     public String signOut() {
-        return "";
+        return "redirect:/signin";
     }
 
 }
