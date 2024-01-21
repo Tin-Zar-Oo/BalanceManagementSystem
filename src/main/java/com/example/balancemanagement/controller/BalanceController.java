@@ -1,12 +1,10 @@
 package com.example.balancemanagement.controller;
-
-
-
-import com.example.balancemanagement.model.entity.Balance;
+import com.example.balancemanagement.domain.entity.Balance.Type;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
@@ -25,9 +23,10 @@ public class BalanceController {
         model.put("type","incomes");
         return "balance-edit";
     }
-    public String save(Balance balance) {
+    @PostMapping("")
+    public String save() {
 
-        return "";
+        return "redirect:/user/balance/%d".formatted(1);
     }
 
     @GetMapping("{id:\\d+}")
@@ -35,14 +34,16 @@ public class BalanceController {
         System.out.println("Balance Id : %d".formatted(id));
         return "balance-details";
     }
+    @GetMapping("delete/{id:\\d+}")
+    public String delete(@PathVariable int id) {
 
-    public String search(Balance.Type type, String category, LocalDate from, LocalDate to) {
+        return "redirect:/";
+    }
+
+    public String search(Type type, String category, LocalDate from, LocalDate to) {
 
         return "";
     }
-      public String delete(int id) {
 
-        return "";
-    }
 
 }

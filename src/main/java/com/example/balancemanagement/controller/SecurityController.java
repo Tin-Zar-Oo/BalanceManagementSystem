@@ -2,20 +2,37 @@ package com.example.balancemanagement.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SecurityController {
-      public String signIn() {
+     @GetMapping("signin")
+      public void loadSignIn() {
 
-        return "";
+       }
+    @PostMapping("signin")
+    public String signIn() {
+
+        return "redirect:/";
     }
+    @GetMapping("signup")
+    public void loadSignUp() {
+
+    }
+    @PostMapping("signup")
     public String signUp() {
 
-        return "";
+        return "redirect:/";
     }
     @GetMapping("signout")
     public String signOut() {
-        return "redirect:/signin";
+
+         return "redirect:/signin";
+    }
+
+    @PostMapping("user/changepass")
+    public String changePass(){
+        return "redirect:/";
     }
 
 }
