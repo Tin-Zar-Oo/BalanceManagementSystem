@@ -7,54 +7,6 @@
     <title>Home</title>
 </head>
 <body>
-<div layout:fragment="content">
-<!-- Search box   -->
-    <div class="card">
-        <div class="card-header"><i class="bi-bar-chart"></i> Balance Report</div>
-        <div class="card-body">
-            <form class="row">
-             <div class="col-3">
-                 <select name="type" id="type" class="form-select">
-                     <option value="">All Type</option>
-                     <option value="incomes">Incomes</option>
-                     <option value="expenses">Expenses</option>
-                 </select>
-             </div>
-                <div class="col-auto">
-                    <input type="date" id="dateFrom" class="form-control">
-                </div>
-                <div class="col-auto">
-                    <input type="date" id="dateTo" class="form-control">
-                </div>
-                <div class="col-auto">
-                <button class="btn btn-primary"><i class="bi-search"></i> Search</button>
-                </div>
-            </form>
-        </div>
-    </div>
-<!-- result table-->
-    <table class="table table-striped mt-4">
-     <thead>
-     <tr>
-         <th>Date</th>
-         <th>Type</th>
-         <th>Category</th>
-         <th class="text-end">Incomes</th>
-         <th class="text-end">Expenses</th>
-         <th class="text-end">Balance</th>
-     </tr>
-     </thead>
-        <tbody>
-        <tr>
-            <td>2022/02/09</td>
-            <td>Incomes</td>
-            <td>Student Fee</td>
-            <td class="text-end">10000</td>
-            <td class="text-end">45600</td>
-            <td class="text-end">12000</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
 </body>
 </html>
