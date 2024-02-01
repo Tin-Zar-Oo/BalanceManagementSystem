@@ -21,7 +21,7 @@
                 <a th:href="@{/admin/users}" class="list-group-item"><i class="bi-people"></i> User Management</a>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#changePassword"
                    class="list-group-item"><i class="bi-key"></i> Change Password</a>
-                <a th:href="@{/signout}" class="list-group-item"><i class="bi-lock"></i> Logout</a>
+                <a href="#" id="signoutLink" class="list-group-item"><i class="bi-door-open"></i> Logout</a>
             </div>
         </div>
         <div class="col">
@@ -32,8 +32,9 @@
 
     </div>
 </div>
-<div th:replace="/fragments/modals :: changePass" id="changePassContainer">
+<div th:replace="/fragments/modals :: changePass"></div>
+<div th:replace="/fragments/forms :: signout"></div>
 
-</div>
+
 </body>
 </html>

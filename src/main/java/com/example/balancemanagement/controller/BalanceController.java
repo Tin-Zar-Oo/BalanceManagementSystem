@@ -12,6 +12,11 @@ import java.time.LocalDate;
 @RequestMapping("user/balance")
 public class BalanceController {
 
+    @GetMapping
+    String  report(){
+        return "balance-report";
+    }
+
     @GetMapping("{type}")
     public String incomes(ModelMap model,@PathVariable String type){
         model.put("title","incomes".equals(type) ?"Income Management" : "Expense Management");

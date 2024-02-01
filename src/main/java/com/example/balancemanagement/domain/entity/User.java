@@ -1,5 +1,6 @@
 package com.example.balancemanagement.domain.entity;
 
+import com.example.balancemanagement.domain.form.SignUpForm;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 public class User implements Serializable {
     @Id
@@ -29,6 +29,17 @@ public class User implements Serializable {
         Admin,
         Member
     }
+    public User(){
+
+    }
+    public User(SignUpForm signUpForm){
+    this.name = signUpForm.getName();
+    this.loginId = signUpForm.getLoginId();
+    this.password = signUpForm.getPassword();
+    this.active = true;
+    this.role = Role.Member;
+    }
+
 
 
 }
