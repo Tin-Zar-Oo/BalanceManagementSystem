@@ -18,7 +18,7 @@ public class AppUserDetailService implements UserDetailsService {
     private UserDao userDao;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      return userDao.findOneByloginId(username)
+      return userDao.findByLoginId(username)
               .map(user -> User.withUsername(username)
                       .password(user.getPassword())
                       .authorities(AuthorityUtils.createAuthorityList(user.getRole().name()))

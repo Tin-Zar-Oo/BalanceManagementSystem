@@ -27,6 +27,8 @@ public class SecurityController {
         return "signup";
     }
 
+
+
     @GetMapping("signup")
     public void loadSignUp() {
 

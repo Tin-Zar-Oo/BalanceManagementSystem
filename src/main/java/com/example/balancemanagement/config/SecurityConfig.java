@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .requestMatchers("/user/**").hasAnyAuthority(Role.Member.name(),Role.Admin.name())
                 .requestMatchers("/admin/**").hasAuthority(Role.Admin.name())
                 .anyRequest().authenticated());
+        http.exceptionHandling(ex -> ex.accessDeniedPage("/denied"));
+                //.accessDeniedPage("/denied");
         return http.build();
     }
 
