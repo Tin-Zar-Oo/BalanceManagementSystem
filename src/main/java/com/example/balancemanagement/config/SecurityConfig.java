@@ -3,6 +3,8 @@ package com.example.balancemanagement.config;
 import com.example.balancemanagement.domain.entity.User.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,6 +35,9 @@ public class SecurityConfig {
         return http.build();
     }
 
-
+    @Bean
+   AuthenticationEventPublisher authenticationEventPublisher(){
+   return new DefaultAuthenticationEventPublisher();
+   }
 
 }

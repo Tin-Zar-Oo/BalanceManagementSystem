@@ -25,5 +25,6 @@ public class UserVO {
         this.name = entity.getName();
         this.email = entity.getEmail();
         this.phone = entity.getPhone();
+        this.status = entity.isActive();
     }
 }

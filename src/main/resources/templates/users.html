@@ -15,16 +15,16 @@
             <form class="row">
                 <div class="col-3">
                     <select class="form-select" name="status" id="status">
-                        <option value="">All User</option>
-                        <option value="Active">Active</option>
-                        <option value="Remove">Removed</option>
+                        <option th:selected="${#strings.equals(param.status,'')}" value="">All User</option>
+                        <option th:selected="${#strings.equals(param.status,'true')}" value="true">Active</option>
+                        <option th:selected="${#strings.equals(param.status,'false')}" value="false">Removed</option>
                     </select>
                 </div>
                 <div class="col-auto" >
-                    <input type="text" class="form-control" placeholder="Name">
+                    <input name="name" type="text" class="form-control" th:value="${param.name}" placeholder="Search Name">
                 </div>
                 <div class="col-auto" >
-                    <input type="date" class="form-control" >
+                    <input name="phone" type="tel" class="form-control" th:value="${param.phone}" placeholder="Search Phone">
                 </div>
                 <div class="col">
                     <button class="btn btn-primary"><i class="bi-search"></i> Search</button>
@@ -46,20 +46,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="align-middle">
-            <td>1</td>
-            <td>Sara</td>
-            <td>Active</td>
-            <td>09258181359</td>
-            <td>sara123@gmail.com</td>
+        <tr th:each="user : ${users}" class="align-middle">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.status} ? 'Active' : 'Suspend'"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.email}"></td>
             <td>
-                <a href="#" class="btn btn-link">
-                    <i class="bi-trash"></i>
+                <a href="#"
+                   th:attr="data-id=${user.id},data-status=${user.status},data-user=${user.name}"
+                   class="btn btn-link userStatusChangeLink">
+                    <i th:if="${user.status}" class="bi-trash"></i>
+                    <i th:unless="${user.status}" class="bi-check"></i>
                 </a>
             </td>
         </tr>
         </tbody>
     </table>
+    <div th:replace="/fragments/modals :: userStatusChange"></div>
 </div>
 
 </body>

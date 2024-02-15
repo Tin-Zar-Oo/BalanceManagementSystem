@@ -20,8 +20,8 @@
                 <a th:href="@{/user/balance/incomes}" class="list-group-item"><i class="bi-arrow-up-circle"></i> Incomes</a>
                 <a th:href="@{/user/balance/expenses}" class="list-group-item"><i class="bi-arrow-down-circle"></i> Expenses</a>
                 <a sec:authorize="hasAuthority('Admin')" th:href="@{/admin/users}" class="list-group-item"><i class="bi-people"></i> User Management</a>
-                <a th:href="@{/user/profile}" class="list-group-item"><i class="bi bi-person-circle"></i> Person</i></a>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#changePassword" class="list-group-item"><i class="bi-key"></i> Change Password</a>
+                <a sec:authorize="hasAuthority('Member')" th:href="@{/user/profile}" class="list-group-item"><i class="bi bi-person-circle"></i> Profile</i></a>
+                <a  href="#" data-bs-toggle="modal" data-bs-target="#changePassword" class="list-group-item"><i class="bi-key"></i> Change Password</a>
                 <a href="#" id="signoutLink" class="list-group-item"><i class="bi-door-open"></i> Logout</a>
             </div>
         </div>

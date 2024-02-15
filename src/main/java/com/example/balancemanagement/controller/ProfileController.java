@@ -25,7 +25,9 @@ public class ProfileController {
     }
 
     @PostMapping("contact")
-    String updateContact(@RequestParam String name, @RequestParam String phone){
-        return null;
+    String updateContact(@RequestParam(required = false) String phone, @RequestParam(required = false) String email){
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.updateContact(username,phone,email);
+        return "redirect:/user/profile";
     }
 }
