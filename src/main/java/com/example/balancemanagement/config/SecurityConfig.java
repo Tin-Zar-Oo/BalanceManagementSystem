@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -38,6 +39,11 @@ public class SecurityConfig {
     @Bean
    AuthenticationEventPublisher authenticationEventPublisher(){
    return new DefaultAuthenticationEventPublisher();
+   }
+
+   @Bean
+   HttpSessionEventPublisher httpSessionEventPublisher(){
+        return new HttpSessionEventPublisher();
    }
 
 }
