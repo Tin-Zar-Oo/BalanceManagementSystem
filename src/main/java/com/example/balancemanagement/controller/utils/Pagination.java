@@ -56,6 +56,15 @@ public class Pagination {
         this.url = url;
         pages = new ArrayList<>();
         pages.add(current);
+        while (pages.size() < 3 && pages.get(0) > 0){
+        pages.add(0,pages.get(0)-1);
+        }
+        while (pages.size() < 5 && pages.get(pages.size()-1) < total-1){
+        pages.add(pages.get(pages.size()-1)+1);
+        }
+        while (pages.size() < 5 && pages.get(0) > 0){
+            pages.add(0,pages.get(0)-1);
+        }
     }
 
     public int getCurrent() {
