@@ -7,14 +7,19 @@
 <body>
 <div th:fragment="pagination(page)">
 
+
     <div class="d-flex justify-content-end">
-        <a th:href="@{${page.url}(page=0)}"  th:classappend="${page.first} ? 'disabled'"   class="btn btn-outline-secondary" >
+        <a th:href="@{${page.url}(page=0)} "  th:classappend="${page.first} ? 'disabled'"   class="btn btn-outline-secondary" >
             <i class="bi-skip-backward me-1"></i>
         </a>
         <a th:href="@{${page.url}(page=${page.current - 1})}" th:classappend="${page.first} ? 'disabled'" class="btn btn-outline-secondary" >
             <i class="bi-skip-start me-1"></i>
         </a>
-        <a th:each="pageNum : ${page.pages}" th:text="${pageNum + 1}"  class="btn btn-outline-secondary" >   1  </a>
+        <a th:each="pageNum : ${page.pages}"
+           th:text="${pageNum + 1}"
+           th:href="@{${page.url}(page = ${pageNum})}"
+           th:classappend="${page.current == pageNum ? 'disabled btn-secondary': 'btn-outline-secondary'}"
+           class="btn" >   1  </a>
 
 
         <a th:href="@{${page.url}(page=${page.current + 1})}" th:classappend="${page.last} ? 'disabled'" class="btn btn-outline-secondary" >

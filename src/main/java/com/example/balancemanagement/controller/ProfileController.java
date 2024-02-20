@@ -30,12 +30,8 @@ public class ProfileController {
         model.put("user",userVO);
         var accessLog = accessLogService.search(username,page,size);
         model.put("list",accessLog.getContent());
-        var pagination = Pagination.builder()
-                .url("/user/profile")
-                .current(accessLog.getNumber())
-                .total(accessLog.getTotalPages())
-                .first(accessLog.isFirst())
-                .last(accessLog.isLast()).build();
+        var pagination = Pagination.builder("/user/profile")
+                .page(accessLog).build();
         model.put("pagination",pagination);
         return "profile";
     }
