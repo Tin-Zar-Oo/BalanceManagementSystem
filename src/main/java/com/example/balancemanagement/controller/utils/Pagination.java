@@ -50,15 +50,15 @@ public class Pagination {
             return this;
         }
         public Builder first(boolean first){
-            this.first = this.first;
+            this.first = first;
             return this;
         }
         public Builder last(boolean last){
-            this.last = this.last;
+            this.last = last;
             return this;
         }
         public Builder params(Map<String,String> params){
-            this.params = this.params;
+            this.params = params;
             return this;
         }
         public Pagination build(){
@@ -67,6 +67,7 @@ public class Pagination {
     }
 
     private Pagination(int current, int total, boolean first, boolean last, String url,Map<String,String> params) {
+        super();
         this.current = current;
         this.total = total;
         this.first = first;
@@ -91,8 +92,8 @@ public class Pagination {
     }
 
     public String getParams(){
-        return  params.entrySet().stream().map(a ->"%s-%s".formatted(a.getKey(),a.getValue())).reduce("",(a,b) ->
-                "%&%".formatted(a,b));
+        return  params.entrySet().stream().map(a ->"%s=%s".formatted(a.getKey(), a.getValue())).reduce("",(a,b) ->
+                "%s&%s".formatted(a,b));
 
     }
 

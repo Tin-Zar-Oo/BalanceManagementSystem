@@ -35,11 +35,15 @@ public class AccessController {
     ){
        var result = service.searchAdmin(type,username,date,page,size);
        model.put("list",result.getContent());
+
        var params = new HashMap<String,String>();
-       params.put("type", type == null ? "" : type.name());
+
+       params.put("type", null == type ?"" : type.name());
        params.put("username", StringUtils.hasLength(username) ?  username : "");
-       params.put("date",date == null ? "": date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+       params.put("date",null == date ? "": date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
        size.ifPresent(a -> params.put("size",a.toString()));
+
        model.put("pager", Pagination.builder("/admin/accesses").page(result).
                params(params).build());
        return "access-log";
