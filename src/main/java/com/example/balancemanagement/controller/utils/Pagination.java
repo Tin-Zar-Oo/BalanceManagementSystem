@@ -22,6 +22,8 @@ public class Pagination {
     @Getter
     private List<Integer> pages;
     private Map<String,String> params;
+    private List<Integer> sizes;
+    private String sizeChangeFormId;
 
     public static Builder builder(String url){
         return new Builder(url);
@@ -35,6 +37,10 @@ public class Pagination {
         private boolean last;
         private  String url;
         private Map<String,String> params;
+        private List<Integer> sizes;
+        private String sizeChangeFormId;
+
+
 
         public Builder(String url){
         this.url = url;
@@ -68,23 +74,32 @@ public class Pagination {
             this.params = params;
             return this;
         }
+
+        public Builder sizes(List<Integer> sizes){
+            this.sizes = sizes;
+            return this;
+        }
+        public Builder sizeChangeFormId(String sizeChangeFormId){
+            this.sizeChangeFormId = sizeChangeFormId;
+            return this;
+        }
         public Pagination build(){
-        return new Pagination(current,total,first,last,url,params);
+        return new Pagination(current,total,first,last,url,params,sizes,sizeChangeFormId);
         }
     }
 
-    private Pagination(int current, int total, boolean first, boolean last, String url,Map<String,String> params) {
+    private Pagination(int current, int total, boolean first, boolean last, String url,Map<String,String> params,List<Integer> sizes
+    , String sizeChangeFormId) {
         super();
         this.current = current;
         this.total = total;
         this.first = first;
         this.last = last;
         this.url = url;
-        this.params = params;
+        this.params = null == params ? new HashMap<String, String>() : params;
+        this.sizes = null == sizes ? new ArrayList<>() : sizes;
+        this.sizeChangeFormId = sizeChangeFormId;
 
-        if(params == null){
-            params = new HashMap<String,String>();
-        }
         pages = new ArrayList<>();
         pages.add(current);
         while (pages.size() < 3 && pages.get(0) > 0){
@@ -96,6 +111,14 @@ public class Pagination {
         while (pages.size() < 5 && pages.get(0) > 0){
             pages.add(0,pages.get(0)-1);
         }
+    }
+
+    public String getSizeChangeFormId() {
+        return sizeChangeFormId;
+    }
+
+    public List<Integer> getSizes() {
+        return sizes;
     }
 
     public String getParams(){

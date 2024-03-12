@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -44,8 +45,11 @@ public class AccessController {
 
        size.ifPresent(a -> params.put("size",a.toString()));
 
-       model.put("pager", Pagination.builder("/admin/accesses").page(result).
-               params(params).build());
+       model.put("pager", Pagination.builder("/admin/accesses")
+               .page(result)
+               .sizes(List.of(5,10,15))
+               .sizeChangeFormId("accessLogSearchForm")
+               .params(params).build());
        return "access-log";
     }
 

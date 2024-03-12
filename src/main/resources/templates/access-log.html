@@ -12,7 +12,8 @@
         <div class="card-header">
             <i class="bi-shield"></i> Access Logs
         </div>
-        <form th:action="@{/admin/accesses}" class="card-body row">
+        <form id="accessLogSearchForm" th:action="@{/admin/accesses}" class="card-body row">
+
             <div class="col-auto">
                 <select name="type"  class="form-select">
                     <option value="">All</option>
