@@ -38,7 +38,7 @@ public class AccessController {
 
        var params = new HashMap<String,String>();
 
-       params.put("type", null == type ?"" : type.name());
+       params.put("type", null == type ? "" : type.name());
        params.put("username", StringUtils.hasLength(username) ?  username : "");
        params.put("date",null == date ? "": date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 

@@ -1,4 +1,5 @@
 package com.example.balancemanagement.controller.utils;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
@@ -8,11 +9,17 @@ import java.util.Map;
 
 public class Pagination {
 
+    @Getter
     private int current;
+    @Getter
     private int total;
+    @Getter
     private boolean first;
+    @Getter
     private boolean last;
+    @Getter
     private String url;
+    @Getter
     private List<Integer> pages;
     private Map<String,String> params;
 
@@ -26,7 +33,7 @@ public class Pagination {
         private int total;
         private boolean first;
         private boolean last;
-        private String url;
+        private  String url;
         private Map<String,String> params;
 
         public Builder(String url){
@@ -92,32 +99,9 @@ public class Pagination {
     }
 
     public String getParams(){
-        return  params.entrySet().stream().map(a ->"%s=%s".formatted(a.getKey(), a.getValue())).reduce("",(a,b) ->
-                "%s&%s".formatted(a,b));
+        return  params.entrySet().stream().map(a ->"%s=%s".formatted(a.getKey(), a.getValue())).reduce("",(a, b) ->
+                "%s&%s".formatted(a, b));
 
     }
 
-    public int getCurrent() {
-        return current;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public boolean isFirst() {
-        return first;
-    }
-
-    public boolean isLast() {
-        return last;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public List<Integer> getPages() {
-        return pages;
-    }
 }
