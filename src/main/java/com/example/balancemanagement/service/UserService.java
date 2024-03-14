@@ -3,10 +3,10 @@ package com.example.balancemanagement.service;
 import com.example.balancemanagement.dao.UserDao;
 import com.example.balancemanagement.domain.entity.User;
 import com.example.balancemanagement.domain.entity.User.Role;
+import com.example.balancemanagement.domain.exception.BalanceAppException;
+import com.example.balancemanagement.domain.form.ChangePasswordForm;
 import com.example.balancemanagement.domain.form.SignUpForm;
 import com.example.balancemanagement.domain.vo.UserVO;
-import org.codehaus.groovy.runtime.GStringUtil;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,5 +62,26 @@ public class UserService {
     @Transactional
     public void changeStatus(int id, boolean status) {
         userDao.findById(id).ifPresent(user -> user.setActive(status));
+    }
+
+    @Transactional
+    public void changePassword(ChangePasswordForm form) {
+        if(!StringUtils.hasLength(form.getOldPassword())){
+            throw new BalanceAppException("Please enter old password.");
+        }
+        if(!StringUtils.hasLength(form.getNewPassword())){
+         throw new BalanceAppException("Please enter new password.");
+        }
+
+        if(form.getNewPassword().equals(form.getOldPassword())){
+            throw new BalanceAppException("Please enter different password with old password.");
+        }
+        var user = userDao.findOneByLoginId(form.getLoginId()).orElseThrow();
+
+        if(!passwordEncoder.matches(form.getOldPassword(), user.getPassword())){
+            throw new BalanceAppException("Please check your old password.");
+
+        }
+        user.setPassword(passwordEncoder.encode(form.getNewPassword()));
     }
 }

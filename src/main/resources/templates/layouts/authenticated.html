@@ -27,6 +27,10 @@
             </div>
         </div>
         <div class="col">
+            <div th:unless="${message} eq null" class="alert alert-warning" role="alert" th:text="${message}"></div>
+            <div th:unless="${message2} eq null" class="alert alert-warning" role="alert" th:text="${message2}"></div>
+
+
             <div layout:fragment="content">
 
             </div>
