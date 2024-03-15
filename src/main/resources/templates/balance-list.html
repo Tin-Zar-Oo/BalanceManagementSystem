@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-success"><i class="bi-search"></i> Search</button>
-                        <a th:href="@{'/user/balance/add/'+ ${type}}" class="btn btn-danger"><i class="bi-plus"></i> Add New</a>
+                        <a th:href="@{/user/balance-edit(type=${type})}" class="btn btn-danger"><i class="bi-plus"></i> Add New</a>
                     </div>
                 </form>
             </div>

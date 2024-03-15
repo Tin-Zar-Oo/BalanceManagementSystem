@@ -3,6 +3,7 @@ package com.example.balancemanagement.service;
 import com.example.balancemanagement.dao.BalanceItemDao;
 import com.example.balancemanagement.domain.entity.Balance;
 import com.example.balancemanagement.domain.entity.BalanceItem;
+import com.example.balancemanagement.domain.form.BalanceEditForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +56,9 @@ public class BalanceService {
         }
 
         return itemDao.findAll(spec, pageInfo);
+    }
+
+    public BalanceEditForm fetchForm(Integer id) {
+        return null;
     }
 }

@@ -1,15 +1,27 @@
 package com.example.balancemanagement.domain.form;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.balancemanagement.domain.entity.Balance;
+import com.example.balancemanagement.domain.entity.Balance.Type;
 
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class BalanceEditForm {
+public class BalanceEditForm implements Serializable {
     private BalanceSummaryForm header;
     private List<BalanceItemForm> items;
+
+    public BalanceEditForm() {
+        header = new BalanceSummaryForm();
+        items = new ArrayList<>();
+    }
+
+    public BalanceEditForm type(Type type){
+    header.setType(type);
+    return this;
+    }
 
     public BalanceSummaryForm getHeader() {
         return header;
