@@ -5,12 +5,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-@Getter
-@Setter
-@NoArgsConstructor
+
+
 public class BalanceEditForm {
     private BalanceSummaryForm header;
     private List<BalanceItemForm> items;
+
+    public BalanceSummaryForm getHeader() {
+        return header;
+    }
+
+    public void setHeader(BalanceSummaryForm header) {
+        this.header = header;
+    }
+
+    public List<BalanceItemForm> getItems() {
+        return items;
+    }
+
+    public void setItems(List<BalanceItemForm> items) {
+        this.items = items;
+    }
+
     public int getTotal() {
 
         return 0;

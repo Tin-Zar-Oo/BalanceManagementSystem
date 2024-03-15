@@ -61,6 +61,7 @@ public class SecurityController {
         System.out.println("Old password "+form.getOldPassword());
         System.out.println("New password "+form.getOldPassword());
         redirect.addFlashAttribute("message","Your password has been changed successfully.");
+        redirect.addFlashAttribute("message1","Please enter old password.");
         redirect.addFlashAttribute("message2","Can you see this?.");
 
         //userService.changePassword(form);

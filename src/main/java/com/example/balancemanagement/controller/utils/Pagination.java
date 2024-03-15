@@ -25,6 +25,10 @@ public class Pagination {
     private List<Integer> sizes;
     private String sizeChangeFormId;
 
+    public boolean isShow(){
+        return pages.size() > 1;
+    }
+
     public static Builder builder(String url){
         return new Builder(url);
     }
@@ -39,6 +43,7 @@ public class Pagination {
         private Map<String,String> params;
         private List<Integer> sizes;
         private String sizeChangeFormId;
+
 
 
 
