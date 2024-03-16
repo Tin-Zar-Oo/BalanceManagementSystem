@@ -3,6 +3,7 @@ package com.example.balancemanagement.controller;
 import com.example.balancemanagement.domain.entity.Balance.Type;
 import com.example.balancemanagement.domain.exception.BalanceAppException;
 import com.example.balancemanagement.domain.form.BalanceEditForm;
+import com.example.balancemanagement.domain.form.BalanceItemForm;
 import com.example.balancemanagement.domain.form.BalanceSummaryForm;
 import com.example.balancemanagement.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BalanceEditController {
          form.setHeader(result.getHeader());
          form.setItems(result.getItems());
         }
-        if( null != type){
+        if( null != type && !form.getHeader().getType().equals(type)){
         form.setHeader(new BalanceSummaryForm());
         form.getHeader().setType(type);
         form.getItems().clear();
@@ -36,6 +37,14 @@ public class BalanceEditController {
         return "balance-edit";
     }
 
+    @PostMapping("item")
+    public String addItem(
+            @ModelAttribute("balanceEditForm") BalanceEditForm form,
+            @ModelAttribute("itemForm") BalanceItemForm itemForm){
+        form.getItems().add(itemForm);
+        var queryParams = form.getHeader().getId() == 0 ? "type=%s".formatted(form.getHeader().getType()) : "id=%s".formatted(form.getHeader().getId());
+        return "redirect:/user/balance-edit?%s".formatted(queryParams);
+    }
 
     @GetMapping("confirm")
     public String confirm(){
@@ -45,6 +54,11 @@ public class BalanceEditController {
     public String save() {
 
         return "redirect:/user/balance/%d".formatted(1);
+    }
+
+    @ModelAttribute("itemForm")
+    public BalanceItemForm itemForm(){
+        return new BalanceItemForm();
     }
 
     @ModelAttribute("balanceEditForm")
