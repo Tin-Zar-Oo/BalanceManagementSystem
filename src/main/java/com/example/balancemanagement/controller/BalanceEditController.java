@@ -6,9 +6,11 @@ import com.example.balancemanagement.domain.form.BalanceEditForm;
 import com.example.balancemanagement.domain.form.BalanceItemForm;
 import com.example.balancemanagement.domain.form.BalanceSummaryForm;
 import com.example.balancemanagement.service.BalanceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -40,7 +42,11 @@ public class BalanceEditController {
     @PostMapping("item")
     public String addItem(
             @ModelAttribute("balanceEditForm") BalanceEditForm form,
-            @ModelAttribute("itemForm") BalanceItemForm itemForm){
+            @ModelAttribute("itemForm") @Valid BalanceItemForm itemForm,
+            BindingResult result){
+        if( result.hasErrors()){
+            return "balance-edit";
+        }
         form.getItems().add(itemForm);
         var queryParams = form.getHeader().getId() == 0 ? "type=%s".formatted(form.getHeader().getType()) : "id=%s".formatted(form.getHeader().getId());
         return "redirect:/user/balance-edit?%s".formatted(queryParams);
