@@ -30,7 +30,7 @@ public class BalanceEditController {
          form.setHeader(result.getHeader());
          form.setItems(result.getItems());
         }
-        if( null != type && !form.getHeader().getType().equals(type)){
+        if( null != type && form.getHeader().getType() != type ){
         form.setHeader(new BalanceSummaryForm());
         form.getHeader().setType(type);
         form.getItems().clear();
@@ -38,6 +38,8 @@ public class BalanceEditController {
 
         return "balance-edit";
     }
+
+
 
     @PostMapping("item")
     public String addItem(
@@ -48,20 +50,44 @@ public class BalanceEditController {
             return "balance-edit";
         }
         form.getItems().add(itemForm);
-        var queryParams = form.getHeader().getId() == 0 ? "type=%s".formatted(form.getHeader().getType()) : "id=%s".formatted(form.getHeader().getId());
-        return "redirect:/user/balance-edit?%s".formatted(queryParams);
+        return "redirect:/user/balance-edit?%s".formatted(form.queryParams());
+    }
+
+    @GetMapping("item")
+    public String deleteItem(@ModelAttribute("balanceEditForm") BalanceEditForm form,@RequestParam int index){
+        var item = form.getItems().get(index);
+        if(item.getId() == 0){
+            form.getItems().remove(item);
+        } else {
+            item.setDeleted(true);
+        }
+        return "redirect:/user/balance-edit?%s".formatted(form.queryParams());
+
     }
 
     @GetMapping("confirm")
     public String confirm(){
         return "balance-edit-confirm";
     }
-    @PostMapping("")
-    public String save() {
 
-        return "redirect:/user/balance/%d".formatted(1);
+    @PostMapping("")
+    public String save(@ModelAttribute("balanceEditForm") BalanceEditForm form,
+                       @ModelAttribute("summaryForm") @Valid BalanceSummaryForm summaryForm, BindingResult result) {
+        if( result.hasErrors()){
+            return "balance-edit-confirm";
+        }
+
+        form.getHeader().setCategory(summaryForm.getCategory());
+        form.getHeader().setDate(summaryForm.getDate());
+        var id = service.save(form);
+        form.clear();
+        return "redirect:/user/balance/details/%d".formatted(id);
     }
 
+    @ModelAttribute("summaryForm")
+    BalanceSummaryForm summaryForm(){
+        return new BalanceSummaryForm();
+    }
     @ModelAttribute("itemForm")
     public BalanceItemForm itemForm(){
         return new BalanceItemForm();

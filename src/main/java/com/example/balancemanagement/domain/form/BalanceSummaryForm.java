@@ -2,6 +2,9 @@ package com.example.balancemanagement.domain.form;
 
 
 import com.example.balancemanagement.domain.entity.Balance.Type;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.io.Serializable;
@@ -9,7 +12,10 @@ import java.time.LocalDate;
 
 public class BalanceSummaryForm implements Serializable {
     private int id;
+    @NotNull(message = "Enter Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @NotBlank(message = "Enter Category")
     private String category;
     private Type type;
 

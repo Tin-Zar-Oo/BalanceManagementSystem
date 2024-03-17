@@ -18,6 +18,16 @@ public class BalanceItemForm implements Serializable {
     private int unitPrice;
     @Min(value = 1, message = "Enter quantity")
     private int quantity;
+    private boolean isDeleted;
+
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public int getId() {
         return id;

@@ -37,5 +37,38 @@
         </a>
     </div>
 </div>
+
+<!--    detail lists    -->
+<div th:fragment="balanceDetailsLists(items, readonly)" class="card">
+    <div class="card-header">
+        <i class="bi-list-check"></i>
+        <span th:text="${balanceEditForm.header.type}"></span> Details List</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Item Name</th>
+                <th class="text-end">Unit Price</th>
+                <th class="text-end">Quantity</th>
+                <th class="text-end">Price</th>
+                <th th:unless="${readonly}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, rowNumber : ${items}" class="align-middle">
+                <td th:text="${rowNumber.index+1}">1</td>
+                <td th:text="${item.item}">Java Basic</td>
+                <td th:text="${#numbers.formatInteger(item.unitPrice,1,'COMMA')}" class="text-end">150,000</td>
+                <td th:text="${item.quantity}" class="text-end">3</td>
+                <td th:text="${#numbers.formatInteger(item.unitPrice * item.quantity,1,'COMMA')}" class="text-end">450,000</td>
+                <td th:unless="${readonly}" class="text-center"> <a th:href="@{/user/balance-edit/item(index=${rowNumber.index})}" class="btn btn-link">
+                    <i class="bi-trash" style="color: red"></i>  </a> </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
 </body>
 </html>

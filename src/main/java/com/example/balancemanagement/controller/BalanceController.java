@@ -54,7 +54,7 @@ public class BalanceController {
     }
 
 
-    @GetMapping("{id:\\d+}")
+    @GetMapping("details/{id:\\d+}")
     public String findById(@PathVariable int id) {
         System.out.println("Balance Id : %d".formatted(id));
         return "balance-details";

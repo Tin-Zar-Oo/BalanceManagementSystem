@@ -47,4 +47,19 @@ public class BalanceEditForm implements Serializable {
         return !items.isEmpty();
     }
 
+    public String queryParams() {
+        return header.getId() == 0 ? "type=%s".formatted(header.getType()) : "id=%s".formatted(header.getId());
+    }
+
+
+    //after delete dont want to show in ui
+    public List<BalanceItemForm> getValidItems()
+    {
+        return items.stream().filter(a -> !a.isDeleted()).toList();
+    }
+
+    public void clear() {
+        header = new BalanceSummaryForm();
+        items.clear();
+    }
 }
