@@ -55,7 +55,8 @@ public class BalanceController {
 
 
     @GetMapping("details/{id:\\d+}")
-    public String findById(@PathVariable int id) {
+    public String findById(@PathVariable int id,ModelMap model) {
+        model.put("vo", service.findById(id));
         System.out.println("Balance Id : %d".formatted(id));
         return "balance-details";
     }

@@ -39,10 +39,10 @@
 </div>
 
 <!--    detail lists    -->
-<div th:fragment="balanceDetailsLists(items, readonly)" class="card">
+<div th:fragment="balanceDetailsLists(dto, readonly)" class="card">
     <div class="card-header">
         <i class="bi-list-check"></i>
-        <span th:text="${balanceEditForm.header.type}"></span> Details List</div>
+        <span th:text="${dto.header.type}"></span> Details List</div>
     <div class="card-body">
         <table class="table table-striped">
             <thead>
@@ -56,7 +56,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item, rowNumber : ${items}" class="align-middle">
+            <tr th:each="item, rowNumber : ${dto.items}" class="align-middle">
                 <td th:text="${rowNumber.index+1}">1</td>
                 <td th:text="${item.item}">Java Basic</td>
                 <td th:text="${#numbers.formatInteger(item.unitPrice,1,'COMMA')}" class="text-end">150,000</td>
@@ -66,6 +66,14 @@
                     <i class="bi-trash" style="color: red"></i>  </a> </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr class="text-end">
+                <td colspan="3">Total</td>
+                <td th:text="${#numbers.formatInteger(dto.totalCount,1,'COMMA')}"></td>
+                <td th:text="${#numbers.formatInteger(dto.total,1,'COMMA')}"></td>
+                <td th:unless="${readonly}"></td>
+            </tr>
+            </tfoot>
 
         </table>
     </div>

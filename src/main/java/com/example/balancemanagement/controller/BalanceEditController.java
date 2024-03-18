@@ -9,7 +9,6 @@ import com.example.balancemanagement.service.BalanceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class BalanceEditController {
                        @RequestParam(required = false) Integer id,
                        @RequestParam(required = false) Type type) {
         if( null != id && form.getHeader().getId() != id){
-         var result = service.fetchForm(id);
+         var result = service.findById(id);
          form.setHeader(result.getHeader());
          form.setItems(result.getItems());
         }
@@ -96,7 +95,7 @@ public class BalanceEditController {
     @ModelAttribute("balanceEditForm")
     public BalanceEditForm form(@RequestParam(required = false) Integer id, @RequestParam(required = false) Type type){
         if( null != id){
-            return service.fetchForm(id);
+            return service.findById(id);
         }
         if( null == type){
             throw new BalanceAppException("Please set type for balance");

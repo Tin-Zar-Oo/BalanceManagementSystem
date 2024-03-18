@@ -66,8 +66,9 @@ public class BalanceService {
         return itemDao.findAll(spec, pageInfo);
     }
 
-    public BalanceEditForm fetchForm(Integer id) {
-        return null;
+    public BalanceEditForm findById(Integer id) {
+      return balanceDao.findById(id).map(BalanceEditForm::new).orElseThrow();
+
     }
 
     @Transactional

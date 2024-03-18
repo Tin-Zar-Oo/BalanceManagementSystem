@@ -13,56 +13,25 @@
         <div class="card-body">
          <div class="row">
              <div class="col-auto">
-                 <span class="form-control">2022/10/12</span>
+                 <span class="form-control" th:text="${#temporals.format(vo.header.date,'yyyy-MM-dd')}">2022/10/12</span>
              </div>
              <div class="col-auto">
-                 <span class="form-control">Incomes</span>
+                 <span class="form-control" th:text="${vo.header.type}">Incomes</span>
              </div>
              <div class="col-4">
-                 <span class="form-control">Student Registration</span>
+                 <span class="form-control" th:text="${vo.header.category}">Student Registration</span>
              </div>
              <div class="col-auto">
-                 <a th:href="@{'/user/balance/edit/1'}" class="btn btn-primary">Edit Details</a>
-                 <a th:href="@{'/user/balance/delete/1'}" class="btn btn-danger">Delete</a>
+                 <a th:href="@{/user/balance-edit(id=${vo.header.id})}" class="btn btn-primary">Edit Details</a>
+                 <a th:href="@{/user/balance/delete/}+ ${vo.header.id}" class="btn btn-danger">Delete</a>
              </div>
          </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">Balance Details</div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Item Name</th>
-                     <th class="text-end">Unit Price</th>
-                    <th class="text-end">Quantity</th>
-                    <th class="text-end">Price</th>
 
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Java Basic</td>
-                    <td class="text-end">150,000</td>
-                    <td class="text-end">3</td>
-                    <td class="text-end">450,000</td>
+    <!--    detail lists    -->
+    <div th:replace="/fragments/components :: balanceDetailsLists(${vo},true)"></div>
 
-
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="3" class="text-end">Total</td>
-                    <td class="text-end">3</td>
-                    <td class="text-end">450,000</td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
 </div>
 
 </body>

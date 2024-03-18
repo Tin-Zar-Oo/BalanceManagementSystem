@@ -18,6 +18,23 @@ public class BalanceEditForm implements Serializable {
         items = new ArrayList<>();
     }
 
+    public BalanceEditForm(Balance entity){
+    header = new BalanceSummaryForm();
+    header.setId(entity.getId());
+    header.setCategory(entity.getCategory());
+    header.setDate(entity.getDate());
+    header.setType(entity.getType());
+
+    items = entity.getItems().stream().map(a -> {
+        var item = new BalanceItemForm();
+        item.setId(a.getId());
+        item.setItem(a.getItem());
+        item.setUnitPrice(a.getUnitPrice());
+        item.setQuantity(a.getQuantity());
+        return item;
+    }).toList();
+    }
+
     public BalanceEditForm type(Type type){
     header.setType(type);
     return this;
@@ -40,8 +57,12 @@ public class BalanceEditForm implements Serializable {
     }
 
     public int getTotal() {
-     return items.stream().mapToInt(a -> a.getQuantity() * a.getUnitPrice()).sum();
+
+        return items.stream().mapToInt(a -> a.getQuantity() * a.getUnitPrice()).sum();
          }
+    public int getTotalCount(){
+        return items.stream().mapToInt(a -> a.getQuantity()).sum();
+    }
 
     public boolean isShowSaveButton(){
         return !items.isEmpty();
